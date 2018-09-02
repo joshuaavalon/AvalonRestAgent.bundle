@@ -15,7 +15,7 @@ def as_album(media):
     album_dir = dirname(path)
     return {
         "path": path,
-        "album": album_dir,
+        "dir": album_dir,
         "file": basename(path)
     }
 

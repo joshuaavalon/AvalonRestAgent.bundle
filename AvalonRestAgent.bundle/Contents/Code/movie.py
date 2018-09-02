@@ -13,7 +13,7 @@ def as_movie(media):
     movie_dir = dirname(path)
     return {
         "path": path,
-        "movie": movie_dir,
+        "dir": movie_dir,
         "file": basename(path)
     }
 

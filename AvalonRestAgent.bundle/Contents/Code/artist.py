@@ -13,7 +13,7 @@ def as_artist(media):
     artist_dir = dirname(path)
     return {
         "path": path,
-        "artist": artist_dir,
+        "dir": artist_dir,
         "file": basename(path)
     }
 

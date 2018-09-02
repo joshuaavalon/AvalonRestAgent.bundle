@@ -14,7 +14,7 @@ def as_show(media):
     show_dir = dirname(season_dir)
     return {
         "path": path,
-        "show": show_dir,
+        "dir": show_dir,
         "file": basename(path)
     }
 
