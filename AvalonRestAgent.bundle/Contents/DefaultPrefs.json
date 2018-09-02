@@ -1,0 +1,28 @@
+[
+  {
+    "id": "LogLevel",
+    "label": "Log level (Default: Info)",
+    "type": "enum",
+    "values": [
+      "Debug",
+      "Info",
+      "Warn",
+      "Error",
+      "Critical",
+      "Exception"
+    ],
+    "default": "Info"
+  },
+  {
+    "id": "Token",
+    "label": "Plex token to update original title and tagline",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "id": "Server",
+    "label": "Server that support Avalon Rest API v1.0",
+    "type": "text",
+    "default": ""
+  }
+]
