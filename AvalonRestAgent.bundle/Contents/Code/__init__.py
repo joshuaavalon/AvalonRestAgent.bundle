@@ -162,11 +162,6 @@ class AvalonRestArtistAgent(Agent.Artist):
         if artist is None:
             return
 
-        name = artist.get("name")
-        if name is None:
-            PlexLog.error("Missing or invalid name: %s" % str(artist))
-            return
-
         result = MetadataSearchResult(id=media.id,
                                       name=media.title,
                                       lang=lang,
@@ -190,11 +185,7 @@ class AvalonRestArtistAgent(Agent.Artist):
         artist = request_json(urljoin(server, "artist"), as_artist(media))
         if artist is None:
             return
-
-        name = artist.get("name")
-        if name is None:
-            PlexLog.error("Missing or invalid name: %s" % str(artist))
-            return
+        
         set_artist(metadata, media, artist)
 
         PlexLog.debug("===================  Update end  ===================")
@@ -222,13 +213,8 @@ class AvalonRestAlbumAgent(Agent.Album):
         if album is None:
             return
 
-        name = album.get("name")
-        if name is None:
-            PlexLog.error("Missing or invalid name: %s" % str(album))
-            return
-
         result = MetadataSearchResult(id=media.id,
-                                      name=name,
+                                      name=media.title,
                                       lang=lang,
                                       year=None,
                                       score=100)
@@ -251,10 +237,6 @@ class AvalonRestAlbumAgent(Agent.Album):
         if album is None:
             return
 
-        name = album.get("name")
-        if name is None:
-            PlexLog.error("Missing or invalid name: %s" % str(album))
-            return
         set_album(metadata, media, album)
 
         PlexLog.debug("===================  Update end  ===================")

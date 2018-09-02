@@ -28,7 +28,7 @@ def set_album(metadata, media, album):
     aired = convert_date(album.get("aired"))
     metadata.originally_available_at = aired
 
-    update_album(media.id, album.get("name"), album.get("collections"))
+    update_album(media.id, media.title, album.get("collections"))
 
     set_album_cover(metadata, album)
 
