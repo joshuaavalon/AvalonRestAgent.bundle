@@ -46,10 +46,19 @@ def get_show_file(media):
 
 
 def as_episode(media, season, episode):
-    show = as_show(media)
-    show["season"] = int(season)
-    show["episode"] = int(episode)
-    return show
+    if hasattr(media, "filename"):
+        path = unquote(media.filename).decode("utf8")
+    else:
+        path = get_show_file(media)
+    season_dir = dirname(path)
+    episode_obj = {
+        "path": path,
+        "dir": season_dir,
+        "file": basename(path),
+        "season": int(season),
+        "episode": int(episode)
+    }
+    return episode_obj
 
 
 def set_episode(metadata, episode):

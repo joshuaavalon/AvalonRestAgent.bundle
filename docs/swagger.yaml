@@ -90,7 +90,7 @@ paths:
                   example: /data/show/Season 01/show - s01e01.mp4
                 dir:
                   type: string
-                  example: /data/show
+                  example: /data/show/Season 01
                 season:
                   type: integer
                   example: 1
