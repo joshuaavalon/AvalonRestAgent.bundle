@@ -185,7 +185,7 @@ class AvalonRestArtistAgent(Agent.Artist):
         artist = request_json(urljoin(server, "artist"), as_artist(media))
         if artist is None:
             return
-        
+
         set_artist(metadata, media, artist)
 
         PlexLog.debug("===================  Update end  ===================")
