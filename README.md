@@ -31,7 +31,7 @@ You need to enter Plex token and metadata server URL in setting.
 **How do I implement an rest API metadata server?**
 
 Read the [schema][schema] and implement it yourself. 
-If you do not know how to do itm this agent is not designed for you.
+If you do not know how to do it, this agent is not designed for you.
 
 **I do not want to open my metadata server to public. What should I do?**
 
