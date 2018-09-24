@@ -42,7 +42,7 @@ def set_show(metadata, media, show):
 
 
 def get_show_file(media):
-    if hasattr(media, "filename"):
+    if hasattr(media, "filename") and media.filename is not None:
         return unquote(media.filename).decode("utf8")
     for season in media.seasons:
         for episode in media.seasons[season].episodes:

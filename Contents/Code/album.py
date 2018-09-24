@@ -57,7 +57,7 @@ def set_album_cover(metadata, media):
 
 
 def get_album_file(media):
-    if hasattr(media, "filename"):
+    if hasattr(media, "filename") and media.filename is not None:
         return unquote(media.filename).decode("utf8")
     for track in media.children:
         return track.items[0].parts[0].file

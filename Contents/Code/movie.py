@@ -43,6 +43,6 @@ def set_movie(metadata, movie):
 
 
 def get_movie_file(media):
-    if hasattr(media, "filename"):
+    if hasattr(media, "filename") and media.filename is not None:
         return unquote(media.filename).decode("utf8")
     return media.items[0].parts[0].file
