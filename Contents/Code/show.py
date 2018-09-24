@@ -1,8 +1,12 @@
-from os.path import basename, dirname
+import hashlib
+import re
+from os.path import basename, dirname, exists, join, splitext
 from urllib import unquote
 
 from utils import convert_date, first_or, join_list_or, set_metadata_actors, \
     set_metadata_list, set_metadata_list_name, update_show
+
+EPISODE_REGEX = "^(.*\S)\s+-\s+s\d{2,}e\d{2,}.*$"
 
 
 def as_show(media):
@@ -38,6 +42,8 @@ def set_show(metadata, media, show):
 
 
 def get_show_file(media):
+    if hasattr(media, "filename"):
+        return unquote(media.filename).decode("utf8")
     for season in media.seasons:
         for episode in media.seasons[season].episodes:
             e = media.seasons[season].episodes[episode]
@@ -46,10 +52,7 @@ def get_show_file(media):
 
 
 def as_episode(media, season, episode):
-    if hasattr(media, "filename"):
-        path = unquote(media.filename).decode("utf8")
-    else:
-        path = get_show_file(media)
+    path = get_show_file(media)
     season_dir = dirname(path)
     episode_obj = {
         "path": path,
@@ -77,3 +80,30 @@ def set_episode(metadata, episode):
     ]
     set_metadata_list_name(metadata, "writers", writers)
     set_metadata_list_name(metadata, "directors", directors)
+
+
+def set_episode_cover(metadata, media, season, episode):
+    path = get_show_file(media)
+    name = guess_name(path)
+    season_dir = dirname(path)
+    jpg = episode_file(name, season, episode, "jpg")
+    file_path = join(season_dir, jpg)
+    if not exists(file_path):
+        png = episode_file(name, season, episode, "png")
+        file_path = join(season_dir, png)
+    if not exists(file_path):
+        return
+    cover = Core.storage.load(file_path)
+    key = hashlib.md5(cover).hexdigest()
+    metadata.posters[key] = Proxy.Media(cover)
+
+
+def guess_name(path):
+    file_name = basename(path)
+    name, ext = splitext(file_name)
+    result = re.search(EPISODE_REGEX, name)
+    return result.group(1)
+
+
+def episode_file(name, season, episode, ext):
+    return "%s - s%se%s.%s" % (name, season.zfill(2), episode.zfill(2), ext)

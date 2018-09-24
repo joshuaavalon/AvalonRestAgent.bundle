@@ -6,10 +6,7 @@ from utils import set_metadata_list
 
 
 def as_artist(media):
-    if hasattr(media, "filename"):
-        path = unquote(media.filename).decode("utf8")
-    else:
-        path = get_artist_file(media)
+    path = get_artist_file(media)
     artist_dir = dirname(path)
     return {
         "path": path,
@@ -42,6 +39,8 @@ def set_artist_cover(metadata, media):
 
 
 def get_artist_file(media):
+    if hasattr(media, "filename"):
+        return unquote(media.filename).decode("utf8")
     for album in media.children:
         for track in album.children:
             return track.items[0].parts[0].file

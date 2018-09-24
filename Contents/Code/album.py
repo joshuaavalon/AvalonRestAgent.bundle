@@ -8,10 +8,7 @@ from utils import convert_date, set_metadata_list, update_album, update_track
 
 
 def as_album(media):
-    if hasattr(media, "filename"):
-        path = unquote(media.filename).decode("utf8")
-    else:
-        path = get_album_file(media)
+    path = get_album_file(media)
     album_dir = dirname(path)
     return {
         "path": path,
@@ -60,5 +57,7 @@ def set_album_cover(metadata, media):
 
 
 def get_album_file(media):
+    if hasattr(media, "filename"):
+        return unquote(media.filename).decode("utf8")
     for track in media.children:
         return track.items[0].parts[0].file

@@ -2,11 +2,11 @@ from album import as_album, set_album
 from artist import as_artist, set_artist
 from log import PlexLog
 from movie import as_movie, set_movie
-from show import as_episode, as_show, set_episode, set_show
+from show import as_episode, as_show, set_episode, set_show, set_episode_cover
 from utils import convert_date, create_id, request_json, update_season_summary
 from urlparse import urljoin
 
-version = "1.0.0"
+version = "1.0.1"
 
 
 # noinspection PyClassHasNoInit,PyShadowingNames
@@ -74,9 +74,10 @@ class AvalonRestTvAgent(Agent.TV_Shows):
                 update_season_summary(season_id, summary)
             for episode in media.seasons[season].episodes:
                 episode_metadata = metadata.seasons[season].episodes[episode]
-                model = request_json("http://192.168.1.32:5000/e",
+                model = request_json(urljoin(server, "episode"),
                                      as_episode(media, season, episode))
                 set_episode(episode_metadata, model)
+                set_episode_cover(episode_metadata, metadata, season, episode)
         PlexLog.debug("===================  Update end  ===================")
 
 

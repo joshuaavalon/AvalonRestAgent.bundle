@@ -6,10 +6,7 @@ from utils import convert_date, first_or, set_metadata_actors, \
 
 
 def as_movie(media):
-    if hasattr(media, "filename"):
-        path = unquote(media.filename).decode("utf8")
-    else:
-        path = get_movie_file(media)
+    path = get_movie_file(media)
     movie_dir = dirname(path)
     return {
         "path": path,
@@ -46,4 +43,6 @@ def set_movie(metadata, movie):
 
 
 def get_movie_file(media):
+    if hasattr(media, "filename"):
+        return unquote(media.filename).decode("utf8")
     return media.items[0].parts[0].file
