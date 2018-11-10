@@ -77,7 +77,7 @@ class AvalonRestTvAgent(Agent.TV_Shows):
                 model = request_json(urljoin(server, "episode"),
                                      as_episode(media, season, episode))
                 set_episode(episode_metadata, model)
-                set_episode_cover(episode_metadata, metadata, season, episode)
+                set_episode_cover(episode_metadata, media, season, episode)
         PlexLog.debug("===================  Update end  ===================")
 
 

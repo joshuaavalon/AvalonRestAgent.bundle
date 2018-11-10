@@ -95,7 +95,7 @@ def set_episode_cover(metadata, media, season, episode):
         return
     cover = Core.storage.load(file_path)
     key = hashlib.md5(cover).hexdigest()
-    metadata.posters[key] = Proxy.Media(cover)
+    metadata.thumbs[key] = Proxy.Media(cover)
 
 
 def guess_name(path):
