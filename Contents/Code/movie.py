@@ -2,7 +2,7 @@ from os.path import basename, dirname
 from urllib import unquote
 
 from utils import convert_date, first_or, set_metadata_actors, \
-    set_metadata_list, set_metadata_list_name
+    set_metadata_list, set_metadata_list_name, set_metadata_posters
 
 
 def as_movie(media):
@@ -40,6 +40,7 @@ def set_movie(metadata, movie):
     ]
     set_metadata_list_name(metadata, "writers", writers)
     set_metadata_list_name(metadata, "directors", directors)
+    set_metadata_posters(metadata, movie.get("posters"))
 
 
 def get_movie_file(media):

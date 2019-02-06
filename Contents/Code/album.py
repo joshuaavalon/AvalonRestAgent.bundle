@@ -4,7 +4,7 @@ from urllib import unquote
 
 from log import PlexLog
 from mutagen import File
-from utils import convert_date, set_metadata_list, update_album, update_track
+from utils import convert_date, set_metadata_list, update_album, update_track, set_metadata_posters
 
 
 def as_album(media):
@@ -24,6 +24,7 @@ def set_album(metadata, media, album):
     set_metadata_list(metadata, "collections", album.get("collections"))
     aired = convert_date(album.get("aired"))
     metadata.originally_available_at = aired
+    set_metadata_posters(metadata, album.get("posters"))
 
     update_album(media.id, media.title, album.get("collections"))
 

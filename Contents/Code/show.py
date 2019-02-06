@@ -4,7 +4,7 @@ from os.path import basename, dirname, exists, join, splitext
 from urllib import unquote
 
 from utils import convert_date, first_or, join_list_or, set_metadata_actors, \
-    set_metadata_list, set_metadata_list_name, update_show
+    set_metadata_list, set_metadata_list_name, set_metadata_posters, update_show
 
 EPISODE_REGEX = "^(.*\S)\s+-\s+s\d{2,}e\d{2,}.*$"
 
@@ -35,6 +35,7 @@ def set_show(metadata, media, show):
     set_metadata_list(metadata, "genres", show.get("genres"))
     set_metadata_list(metadata, "collections", show.get("collections"))
     set_metadata_actors(metadata, show.get("actors"))
+    set_metadata_posters(metadata, show.get("posters"))
 
     original_title = show.get("original_title")
     tagline = join_list_or(show.get("tagline"))
@@ -80,6 +81,7 @@ def set_episode(metadata, episode):
     ]
     set_metadata_list_name(metadata, "writers", writers)
     set_metadata_list_name(metadata, "directors", directors)
+    set_metadata_posters(metadata, episode.get("posters"))
 
 
 def set_episode_cover(metadata, media, season, episode):

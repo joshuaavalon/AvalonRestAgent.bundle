@@ -53,6 +53,26 @@ def set_metadata_actors(metadata, actors):
         role.role = actor.get("role")
         role.photo = actor.get("photo")
 
+def set_metadata_posters(metadata, posterUrls):
+    if posterUrls is None:
+        return
+
+    valid_names = list()
+    i = 0
+
+    PlexLog.info('Attempting to get new posters')
+
+    for posterUrl in posterUrls:
+        if posterUrl not in metadata.posters:
+            valid_names.append(posterUrl)
+            try:
+                metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl).content, sort_order=i+1)
+                PlexLog.info('New poster added: %s' % posterUrl)
+            except:
+                PlexLog.error('New poster error: %s' % posterUrl)
+                pass
+
+    metadata.posters.validate_keys(valid_names)
 
 def convert_date(date_str):
     if date_str is None:

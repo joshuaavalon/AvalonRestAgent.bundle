@@ -285,6 +285,12 @@ components:
             "1": "This is the summary of season 1."
             "2": "This is the summary of season 2."
             "3": "This is the summary of season 3."
+        posters:
+          type: array
+          items:
+            type: string
+            example: https://example.com/example.png
+          description: Show Poster
     Episode:
       type: object
       properties:
@@ -318,6 +324,12 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Person"
+        posters:
+          type: array
+          items:
+            type: string
+            example: https://example.com/example.png
+          description: Episode Poster            
     Movie:
       type: object
       required:
@@ -389,6 +401,12 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Person"
+        posters:
+          type: array
+          items:
+            type: string
+            example: https://example.com/example.png
+          description: Movie Poster
     Actor:
       type: object
       required:
@@ -432,6 +450,12 @@ components:
             type: string
             example: J-Pop Collection
           description: Collection(s) of the artist
+        posters:
+          type: array
+          items:
+            type: string
+            example: https://example.com/example.png
+          description: Album Poster          
     Artist:
       type: object
       properties:
